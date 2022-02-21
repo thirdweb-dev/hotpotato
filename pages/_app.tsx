@@ -15,4 +15,4 @@ function MyApp({ Component, pageProps }) {
 
 export default MyApp;
 
-// export { getServerSideProps } from "../components/chakra/manager";
+export { getServerSideProps } from "../components/chakra/manager";
