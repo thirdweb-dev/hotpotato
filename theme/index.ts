@@ -17,7 +17,7 @@ const sizes = {
 
 const config = {
   initialColorMode: "light",
-  useSystemColorMode: true,
+  useSystemColorMode: false,
 };
 
 export const chakraTheme = extendTheme({ colors, config, sizes });
