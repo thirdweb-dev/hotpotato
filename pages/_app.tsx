@@ -45,7 +45,7 @@ function PotatoApp({ Component, pageProps }) {
           cardType: "summary_large_image",
         }}
       />
-      <Providers chainId={ChainId.Mumbai}>
+      <Providers chainId={ChainId.Polygon}>
         <ChakraManager cookies={pageProps.cookies}>
           <Flex justify="space-around" flexDir="column" minH="100vh">
             <Header />
@@ -53,7 +53,7 @@ function PotatoApp({ Component, pageProps }) {
               <Component {...pageProps} />
             </Center>
             <Footer />
-            <NetworkSwitcher requiredChainId={ChainId.Mumbai} />
+            <NetworkSwitcher requiredChainId={ChainId.Polygon} />
           </Flex>
         </ChakraManager>
       </Providers>

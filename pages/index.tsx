@@ -14,6 +14,7 @@ import { NFTRenderer } from "../components/nft/nft";
 import { useGameState } from "../hooks/useGameState";
 import Countdown from "react-countdown";
 import { ActionArea } from "../components/actions/action-area";
+import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
@@ -24,19 +25,13 @@ export default function Home() {
   return (
     <Container py={4} maxW="container.page">
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 8, md: 16 }}>
-        <NFTRenderer
-          contractAddress="0xE0Ed2e05589aacd9E7AAAc642B78fa4B6bEc43fD"
-          tokenId={0}
-        />
+        <NFTRenderer contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
         <Flex direction="column" gap={8} justify="space-around" flexGrow={1}>
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
             Join the Hot Potato NFT game!
           </Heading>
 
-          <ActionArea
-            contractAddress="0xE0Ed2e05589aacd9E7AAAc642B78fa4B6bEc43fD"
-            tokenId={0}
-          />
+          <ActionArea contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
           <StatGroup>
             <Stat>
               <StatLabel>Round</StatLabel>

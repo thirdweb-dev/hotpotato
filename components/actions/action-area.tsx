@@ -3,7 +3,6 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  Heading,
   Input,
   Skeleton,
   Text,
@@ -15,6 +14,8 @@ import { useNFT } from "../nft/nft";
 import { ConnectWallet } from "../shared/connect-wallet-button";
 import { useForm } from "react-hook-form";
 import { isAddress } from "ethers/lib/utils";
+import { FiTwitter } from "react-icons/fi";
+import { LinkButton } from "../shared/link-button";
 
 interface ActionAreaProps {
   contractAddress: string;
@@ -98,10 +99,20 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
 
   return (
     <Flex direction="column" gap={4}>
-      <Heading size="lg">You&apos;re not it.</Heading>
       <Text fontWeight="500">
-        Hot potato is not in your wallet, maybe it will be soon?
+        Hot potato is not in your wallet, tweet to add your wallet to the
+        players list.
       </Text>
+      <LinkButton
+        isExternal
+        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+          `${address} ❤️ potatoes`,
+        )}&in_reply_to=1496239806589902855&related=hotpotatogg,thirdweb_`}
+        colorScheme="twitter"
+        leftIcon={<FiTwitter />}
+      >
+        Tweet @ potato
+      </LinkButton>
     </Flex>
   );
 };
