@@ -1,10 +1,17 @@
-import { Container, Flex, Heading } from "@chakra-ui/react";
+import {
+  Text,
+  Container,
+  Flex,
+  Heading,
+  VisuallyHidden,
+} from "@chakra-ui/react";
 import { ColorSchemeToggle } from "../shared/color-toggle";
-import { ConnectWallet } from "../shared/connect-wallet-button";
+import { LinkButton } from "../shared/link-button";
+import { IoGameControllerOutline } from "react-icons/io5";
 
 export const Header: React.FC = () => {
   return (
-    <Flex py={4} as="header">
+    <Flex py={4} as="header" borderBottomWidth="1px">
       <Container
         maxW="container.page"
         as={Flex}
@@ -12,11 +19,30 @@ export const Header: React.FC = () => {
         align="center"
       >
         <Heading as="h1" size="xl">
-          🥔☄️ Game
+          🔥🥔
+          <VisuallyHidden>Hot Potato</VisuallyHidden>
+          <Text as="span" display={{ base: "none", md: "inline" }}>
+            {" "}
+            Game
+          </Text>
         </Heading>
-        <Flex gap={2} as="nav">
+        <Flex gap={4} as="nav">
           <ColorSchemeToggle />
-          <ConnectWallet />
+          <LinkButton
+            colorScheme="purple"
+            _hover={{ textDecor: "underline" }}
+            href="/farm"
+            variant="link"
+          >
+            Farm To web3
+          </LinkButton>
+          <LinkButton
+            href="/"
+            colorScheme="purple"
+            rightIcon={<IoGameControllerOutline />}
+          >
+            Play
+          </LinkButton>
         </Flex>
       </Container>
     </Flex>

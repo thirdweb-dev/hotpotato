@@ -87,7 +87,7 @@ export const ConnectWallet: React.FC<ButtonProps> = (buttonProps) => {
       <MenuButton
         isLoading={connector.loading}
         as={Button}
-        colorScheme="blue"
+        colorScheme="purple"
         rightIcon={<FiChevronDown />}
         {...buttonProps}
       >

@@ -1,11 +1,8 @@
 import {
-  Button,
   Container,
   Flex,
-  FormControl,
-  FormHelperText,
   Heading,
-  Input,
+  Text,
   SimpleGrid,
   Stat,
   StatLabel,
@@ -17,6 +14,7 @@ import {
 import { NFTRenderer } from "../components/nft/nft";
 import { useGameState } from "../hooks/useGameState";
 import Countdown from "react-countdown";
+import { ConnectWallet } from "../components/shared/connect-wallet-button";
 
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
@@ -35,19 +33,9 @@ export default function Home() {
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
             Join the Hot Potato NFT game!
           </Heading>
-          <Flex as="form">
-            <FormControl>
-              <Flex gap={2}>
-                <Input variant="filled" size="lg" placeholder="@elonmusk" />
-                <Button size="lg" colorScheme="purple" type="submit">
-                  Enter now
-                </Button>
-              </Flex>
-              <FormHelperText fontStyle="italic">
-                Drop your twitter handle to get notified when you get the hot
-                potato NFT!
-              </FormHelperText>
-            </FormControl>
+          <Flex direction="column" gap={4}>
+            <Text fontWeight="500">Please connect your wallet to begin</Text>
+            <ConnectWallet size="lg" />
           </Flex>
           <StatGroup>
             <Stat>
