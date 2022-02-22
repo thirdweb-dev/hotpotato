@@ -74,7 +74,7 @@ export const SupportedNetworkToChainIdMap: Record<
 export type SupportedNetwork = keyof typeof SupportedNetworkToChainIdMap;
 
 export function getChainIdFromNetwork(
-  network?: SupportedNetwork
+  network?: SupportedNetwork,
 ): SUPPORTED_CHAIN_ID | undefined {
   if (!network || !SupportedNetworkToChainIdMap[network]) {
     return undefined;
@@ -88,7 +88,7 @@ export function isSupportedNetwork(network?: string): boolean {
 }
 
 export function getNetworkFromChainId<T extends SUPPORTED_CHAIN_ID>(
-  chainId: T
+  chainId: T,
 ): SupportedNetwork {
   return SupportedChainIdToNetworkMap[chainId] || "";
 }

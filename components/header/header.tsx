@@ -1,4 +1,4 @@
-import { Button, Container, Flex, Heading } from "@chakra-ui/react";
+import { Container, Flex, Heading } from "@chakra-ui/react";
 import { ColorSchemeToggle } from "../shared/color-toggle";
 import { ConnectWallet } from "../shared/connect-wallet-button";
 
@@ -16,8 +16,6 @@ export const Header: React.FC = () => {
         </Heading>
         <Flex gap={2} as="nav">
           <ColorSchemeToggle />
-          <Button>foo</Button>
-          <Button>bar</Button>
           <ConnectWallet />
         </Flex>
       </Container>

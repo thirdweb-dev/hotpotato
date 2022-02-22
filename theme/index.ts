@@ -20,5 +20,11 @@ const config = {
   useSystemColorMode: false,
 };
 
-export const chakraTheme = extendTheme({ colors, config, sizes });
+const fonts = {
+  heading: `'Londrina Solid', cursive`,
+  // body: `"Inter", -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif`,
+  // mono: `'IBM Plex Mono', monospace`,
+};
+
+export const chakraTheme = extendTheme({ colors, config, sizes, fonts });
 export default chakraTheme;

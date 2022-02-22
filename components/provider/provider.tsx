@@ -35,7 +35,7 @@ function replacer(_key: string, value: any) {
 }
 
 export const StorageSingleton = new IpfsStorage(
-  process.env.NEXT_PUBLIC_IPFS_GATEWAY_URL
+  process.env.NEXT_PUBLIC_IPFS_GATEWAY_URL,
 );
 
 export const alchemyUrlMap: Record<SUPPORTED_CHAIN_ID, string> = {
@@ -79,7 +79,7 @@ export const Providers: React.FC<ProviderProps> = ({ children, chainId }) => {
           gasSettings: { maxPriceInGwei: 650 },
           readonlySettings: chainId
             ? {
-                chainId: chainId,
+                chainId,
                 rpcUrl: alchemyUrlMap[chainId],
               }
             : undefined,

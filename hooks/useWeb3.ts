@@ -76,7 +76,7 @@ const useBalance = (address?: string) => {
         const provider = ethers.getDefaultProvider(
           chainId in alchemyUrlMap
             ? alchemyUrlMap[chainId as SUPPORTED_CHAIN_ID]
-            : chainId
+            : chainId,
         );
         balance = await provider.getBalance(address || "");
       }
@@ -90,7 +90,7 @@ const useBalance = (address?: string) => {
     },
     {
       enabled: !!chainId && !!address,
-    }
+    },
   );
 };
 
@@ -121,7 +121,7 @@ export function useWeb3() {
       }
       return cData;
     },
-    [network]
+    [network],
   );
 
   return {
