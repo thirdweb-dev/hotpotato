@@ -9,7 +9,7 @@ import { ChainId, SUPPORTED_CHAIN_ID } from "../../utils/network";
 
 const __CACHE_BUSTER = "tw_v2.0.0-nightly.2";
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // 24 hours

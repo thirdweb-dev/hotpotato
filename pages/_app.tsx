@@ -5,6 +5,7 @@ import { Header } from "../components/header/header";
 import { Providers } from "../components/provider/provider";
 import { ChainId } from "../utils/network";
 import { DefaultSeo } from "next-seo";
+import { NetworkSwitcher } from "../components/network-switcher/network-switcher";
 
 const BASE_URL = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -52,6 +53,7 @@ function PotatoApp({ Component, pageProps }) {
               <Component {...pageProps} />
             </Center>
             <Footer />
+            <NetworkSwitcher requiredChainId={ChainId.Mumbai} />
           </Flex>
         </ChakraManager>
       </Providers>

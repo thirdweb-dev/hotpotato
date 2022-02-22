@@ -2,7 +2,6 @@ import {
   Container,
   Flex,
   Heading,
-  Text,
   SimpleGrid,
   Stat,
   StatLabel,
@@ -14,7 +13,7 @@ import {
 import { NFTRenderer } from "../components/nft/nft";
 import { useGameState } from "../hooks/useGameState";
 import Countdown from "react-countdown";
-import { ConnectWallet } from "../components/shared/connect-wallet-button";
+import { ActionArea } from "../components/actions/action-area";
 
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
@@ -23,7 +22,7 @@ export default function Home() {
   const gameState = useGameState();
   const isMobile = useBreakpointValue({ base: true, md: false });
   return (
-    <Container maxW="container.page">
+    <Container py={4} maxW="container.page">
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 8, md: 16 }}>
         <NFTRenderer
           contractAddress="0xE0Ed2e05589aacd9E7AAAc642B78fa4B6bEc43fD"
@@ -33,10 +32,11 @@ export default function Home() {
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
             Join the Hot Potato NFT game!
           </Heading>
-          <Flex direction="column" gap={4}>
-            <Text fontWeight="500">Please connect your wallet to begin</Text>
-            <ConnectWallet size="lg" />
-          </Flex>
+
+          <ActionArea
+            contractAddress="0xE0Ed2e05589aacd9E7AAAc642B78fa4B6bEc43fD"
+            tokenId={0}
+          />
           <StatGroup>
             <Stat>
               <StatLabel>Round</StatLabel>
