@@ -51,7 +51,11 @@ export const NFTRenderer: React.FC<NFTRendererProps> = ({
       {...restBoxProps}
     >
       <AspectRatio ratio={1} w="full">
-        <Skeleton isLoaded={!!asset.data?.metadata?.image}>
+        <Skeleton
+          borderRadius="3xl"
+          overflow="hidden"
+          isLoaded={!!asset.data?.metadata?.image}
+        >
           <Image
             w="full"
             h="full"

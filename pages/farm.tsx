@@ -7,6 +7,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { NFTRenderer } from "../components/nft/nft";
+import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 
 export default function Farm() {
   return (
@@ -38,7 +39,7 @@ export default function Farm() {
             </Heading>
             <NFTRenderer
               display={{ base: "block", md: "none" }}
-              contractAddress="0xE0Ed2e05589aacd9E7AAAc642B78fa4B6bEc43fD"
+              contractAddress={CONTRACT_ADDRESS}
               tokenId={0}
             />
             <Text fontSize="xl">Meet hot potato. 🥔🔥</Text>
@@ -78,8 +79,8 @@ export default function Farm() {
           </Flex>
           <NFTRenderer
             display={{ base: "none", md: "block" }}
-            contractAddress="0xE0Ed2e05589aacd9E7AAAc642B78fa4B6bEc43fD"
-            tokenId={0}
+            contractAddress={CONTRACT_ADDRESS}
+            tokenId={TOKEN_ID}
           />
         </SimpleGrid>
       </Container>
