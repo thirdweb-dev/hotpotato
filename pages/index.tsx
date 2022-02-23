@@ -19,7 +19,6 @@ import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 import { useWeb3 } from "../hooks/useWeb3";
 import { useHasPlayed } from "../hooks/useHasPlayed";
 import { useHasRegistered } from "../hooks/useHasRegistered";
-
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
 
