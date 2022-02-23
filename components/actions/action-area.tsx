@@ -6,6 +6,7 @@ import {
   Input,
   Skeleton,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { BigNumberish } from "ethers";
 import { useTransferMutation } from "../../hooks/useTransferMutation";
@@ -38,6 +39,8 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     });
   const mutation = useTransferMutation(contractAddress, tokenId);
 
+  const toast = useToast();
+
   if (asset.isLoading) {
     return (
       <Flex direction="column" gap={4}>
@@ -64,7 +67,25 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     return (
       <Flex
         as="form"
-        onSubmit={handleSubmit((d) => mutation.mutate(d.to))}
+        onSubmit={handleSubmit((d) =>
+          mutation.mutate(d.to, {
+            onSuccess: () => {
+              toast({
+                title: "Potato heating up! 🔥",
+                description: "Potato got passed, heat level increased.",
+                status: "success",
+              });
+            },
+            onError: (err) => {
+              console.error("failed to transfer", err);
+              toast({
+                title: "Potato dropped 🥶",
+                description: "Something went wrong, you could try again!",
+                status: "error",
+              });
+            },
+          }),
+        )}
         direction="column"
         gap={4}
       >
