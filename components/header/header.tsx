@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   VisuallyHidden,
+  Link,
 } from "@chakra-ui/react";
 import { ColorSchemeToggle } from "../shared/color-toggle";
 import { LinkButton } from "../shared/link-button";
@@ -18,14 +19,16 @@ export const Header: React.FC = () => {
         justify="space-between"
         align="center"
       >
-        <Heading as="h1" size="xl">
-          🔥🥔
-          <VisuallyHidden>Hot Potato</VisuallyHidden>
-          <Text as="span" display={{ base: "none", md: "inline" }}>
-            {" "}
-            Game
-          </Text>
-        </Heading>
+        <Link href="/">
+          <Heading as="h1" size="xl">
+            🔥🥔
+            <VisuallyHidden>Hot Potato</VisuallyHidden>
+            <Text as="span" display={{ base: "none", md: "inline" }}>
+              {" "}
+              Game
+            </Text>
+          </Heading>
+        </Link>
         <Flex gap={4} as="nav">
           <ColorSchemeToggle />
           <LinkButton
