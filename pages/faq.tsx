@@ -1,4 +1,11 @@
-import { Box, Container, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Link,
+} from "@chakra-ui/react";
 
 import FaqItem from "../components/faqs-item/faqItem";
 
@@ -42,7 +49,15 @@ export default function FAQ() {
             />
             <FaqItem
               question="How do I know where the potato is?"
-              answer="Follow the hot potato twitter account @HotPotatoGG for updates."
+              answer={
+                <p>
+                  Follow the hot potato twitter account{" "}
+                  <Link isExternal href={"https://twitter.com/@HotPotatoGG"}>
+                    @HotPotatoGG
+                  </Link>{" "}
+                  for updates
+                </p>
+              }
             />
             <FaqItem
               question="What blockchain is the game being played on?"
