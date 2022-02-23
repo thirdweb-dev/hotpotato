@@ -15,12 +15,15 @@ import { useGameState } from "../hooks/useGameState";
 import Countdown from "react-countdown";
 import { ActionArea } from "../components/actions/action-area";
 import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
+// import { useGamePlayers } from "../hooks/usePlayers";
 
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
 
 export default function Home() {
   const gameState = useGameState();
+  // const players = useGamePlayers();
+  // console.log("*** players", players.data);
   const isMobile = useBreakpointValue({ base: true, md: false });
   return (
     <Container py={4} maxW="container.page">
