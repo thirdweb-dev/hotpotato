@@ -130,7 +130,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
           You helped what could potentially be the world record of the most
           transferred NFT!
         </Text>
-        <Heading as="h5">You've made history!</Heading>
+        <Heading as="h5">You&apos;ve made history!</Heading>
       </Flex>
     );
   }
@@ -139,7 +139,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     return (
       <Flex direction="column" gap={4}>
         <Text fontWeight="500">
-          You're registered to receive the Hot potato!
+          You&apos;re registered to receive the Hot potato!
         </Text>
         <Heading as="h5">
           Keep an eye on your twitter feed for notifications!
