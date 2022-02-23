@@ -19,8 +19,8 @@ import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 import { useWeb3 } from "../hooks/useWeb3";
 import { useHasPlayed } from "../hooks/useHasPlayed";
 import { useHasRegistered } from "../hooks/useHasRegistered";
-import { LinkButton } from "../components/shared/link-button";
-import { IoLogoTwitter } from "react-icons/io5";
+// import { LinkButton } from "../components/shared/link-button";
+// import { IoLogoTwitter } from "react-icons/io5";
 
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
