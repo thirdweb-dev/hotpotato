@@ -37,6 +37,14 @@ export const Header: React.FC = () => {
             Farm To web3
           </LinkButton>
           <LinkButton
+            colorScheme="purple"
+            _hover={{ textDecor: "underline" }}
+            href="/faq"
+            variant="link"
+          >
+            F.A.Q
+          </LinkButton>
+          <LinkButton
             href="/"
             colorScheme="purple"
             rightIcon={<IoGameControllerOutline />}
