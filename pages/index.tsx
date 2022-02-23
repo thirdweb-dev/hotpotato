@@ -16,6 +16,9 @@ import Countdown from "react-countdown";
 import { ActionArea } from "../components/actions/action-area";
 import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 // import { useGamePlayers } from "../hooks/usePlayers";
+import { useWeb3 } from "../hooks/useWeb3";
+import { useHasPlayed } from "../hooks/useHasPlayed";
+import { useHasRegistered } from "../hooks/useHasRegistered";
 
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
@@ -25,13 +28,20 @@ export default function Home() {
   // const players = useGamePlayers();
   // console.log("*** players", players.data);
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const { address } = useWeb3();
+  const hasPlayed = useHasPlayed(address);
+  const hasRegistered = useHasRegistered(address);
   return (
     <Container py={4} maxW="container.page">
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 8, md: 16 }}>
         <NFTRenderer contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
         <Flex direction="column" gap={8} justify="space-around" flexGrow={1}>
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
-            Join the Hot Potato NFT game!
+            {hasPlayed.data
+              ? "You Already Passed the Potato!"
+              : hasRegistered.data
+              ? "You're registered!"
+              : "Join the Hot Potato NFT game!"}
           </Heading>
 
           <ActionArea contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />

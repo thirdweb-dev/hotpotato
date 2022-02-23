@@ -4,10 +4,12 @@ import {
   Flex,
   Heading,
   VisuallyHidden,
+  Link,
 } from "@chakra-ui/react";
 import { ColorSchemeToggle } from "../shared/color-toggle";
 import { LinkButton } from "../shared/link-button";
 import { IoGameControllerOutline } from "react-icons/io5";
+import { ConnectWallet } from "../shared/connect-wallet-button";
 
 export const Header: React.FC = () => {
   return (
@@ -34,7 +36,7 @@ export const Header: React.FC = () => {
             href="/farm"
             variant="link"
           >
-            Farm To web3
+            Manifesto
           </LinkButton>
           <LinkButton
             href="/"
@@ -43,6 +45,7 @@ export const Header: React.FC = () => {
           >
             Play
           </LinkButton>
+          <ConnectWallet size="md" />
         </Flex>
       </Container>
     </Flex>
