@@ -39,6 +39,14 @@ export const Header: React.FC = () => {
             Manifesto
           </LinkButton>
           <LinkButton
+            colorScheme="purple"
+            _hover={{ textDecor: "underline" }}
+            href="/faq"
+            variant="link"
+          >
+            F.A.Q
+          </LinkButton>
+          <LinkButton
             href="/"
             colorScheme="purple"
             rightIcon={<IoGameControllerOutline />}
