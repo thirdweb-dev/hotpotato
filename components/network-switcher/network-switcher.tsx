@@ -74,7 +74,7 @@ export const NetworkSwitcher: React.FC<NetworkSwitcherProps> = ({
                 colorScheme="purple"
                 isDisabled={!switchNetwork}
                 leftIcon={<HiOutlineSwitchHorizontal />}
-                onClick={() => switchNetwork(ChainId.Mumbai)}
+                onClick={() => switchNetwork(ChainId.Polygon)}
               >
                 Switch Network
               </Button>

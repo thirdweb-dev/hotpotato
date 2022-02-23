@@ -1,7 +1,4 @@
-import {
-  Text,
-  Box,
-} from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react";
 
 export default function faqItem(props) {
   return (
@@ -9,9 +6,7 @@ export default function faqItem(props) {
       <Text fontSize="2xl" fontWeight="bold">
         {props.question}
       </Text>
-      <Text fontSize="md">
-        {props.answer}
-      </Text>
+      <Text fontSize="md">{props.answer}</Text>
     </Box>
   );
 }
