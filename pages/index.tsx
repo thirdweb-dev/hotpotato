@@ -19,6 +19,8 @@ import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 import { useWeb3 } from "../hooks/useWeb3";
 import { useHasPlayed } from "../hooks/useHasPlayed";
 import { useHasRegistered } from "../hooks/useHasRegistered";
+import { LinkButton } from "../components/shared/link-button";
+import { IoLogoTwitter } from "react-icons/io5";
 
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
@@ -78,6 +80,18 @@ export default function Home() {
                 </StatNumber>
               </Skeleton>
             </Stat>
+            {/* <Stat>
+              <StatLabel>Updates</StatLabel>
+              <Skeleton isLoaded={true}>
+                <LinkButton
+                  href="https://twitter.com/@HotPotatoGG"
+                  colorScheme="purple"
+                  rightIcon={<IoLogoTwitter />}
+                >
+                  @HotPotatoGG
+                </LinkButton>
+              </Skeleton>
+            </Stat> */}
           </StatGroup>
         </Flex>
       </SimpleGrid>
