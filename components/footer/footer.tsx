@@ -1,6 +1,4 @@
 import { Container, Flex, Text, Link } from "@chakra-ui/react";
-import { IoLogoTwitter } from "react-icons/io5";
-import { LinkButton } from "../shared/link-button";
 
 export const Footer: React.FC = () => {
   return (
@@ -17,7 +15,6 @@ export const Footer: React.FC = () => {
             thirdweb
           </Link>{" "}
           hackweek, best enjoyed with 🔥.
-
         </Text>
       </Container>
     </Flex>
