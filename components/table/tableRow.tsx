@@ -19,6 +19,11 @@ function msToTime(duration) {
   return hoursString + ":" + minutesString + ":" + secondsString;
 }
 
+//formatting for address (responsive)
+function truncateAddress(address) {
+  return address.slice(0, 6) + "..." + address.slice(-4);
+}
+
 export const TableRow: React.FC<TableRowProps> = ({ info }) => {
   if (!info) {
     return null;
@@ -29,11 +34,11 @@ export const TableRow: React.FC<TableRowProps> = ({ info }) => {
 
   return (
     <Tr>
-      <Td>{info.twitterHandle}</Td>
-      <Td>{info.address}</Td>
+      <Td>{info.twitterHandle ? "@" + info.twitterHandle : " "}</Td>
+      <Td>{truncateAddress(info.address)}</Td>
       <Td>{date.toLocaleDateString()}</Td>
       <Td>{date.toLocaleTimeString()}</Td>
-      <Td>{msToTime(info.timeSpent)}</Td>
+      <Td>{info.timeSpent !== 0 ? msToTime(info.timeSpent) : "-----"}</Td>
     </Tr>
   );
 };
