@@ -1,14 +1,23 @@
-import { Box, Container, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
-
-import { Table, Thead, Tr, Th, Td, TableCaption } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  SimpleGrid,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  TableCaption,
+} from "@chakra-ui/react";
 
 import { TableRow } from "../components/table/tableRow";
 import { useGamePlayers } from "../hooks/usePlayers";
 
 export default function LOG() {
   const player = useGamePlayers();
-  let playerRows = player.data?.map((info) => {
-    return <TableRow info={info}></TableRow>;
+  const playerRows = player.data?.map((info) => {
+    return <TableRow key={info.address} info={info}></TableRow>;
   });
 
   console.log(player.data);
