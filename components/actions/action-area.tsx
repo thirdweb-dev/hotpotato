@@ -84,7 +84,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     );
   }
 
-  if (!playerState.isOwner) {
+  if (playerState.isOwner) {
     return (
       <Flex
         as="form"
