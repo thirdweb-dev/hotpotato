@@ -55,7 +55,7 @@ export default function Home() {
           <ActionArea
             playerState={playerStateData}
             contractAddress={CONTRACT_ADDRESS}
-            tokenId={TOKEN_ID}
+            tokenId={gameState.data.current_round}
           />
 
           <StatGroup>
