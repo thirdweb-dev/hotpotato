@@ -23,7 +23,7 @@ import { PlayerStateType } from "../../hooks/usePlayerState";
 
 interface ActionAreaProps {
   contractAddress: string;
-  tokenId?: BigNumberish;
+  tokenId: BigNumberish;
   playerState: PlayerStateType;
 }
 

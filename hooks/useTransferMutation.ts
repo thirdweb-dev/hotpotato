@@ -6,13 +6,12 @@ import { queryClient } from "../components/provider/provider";
 
 export function useTransferMutation(
   contractAddress: string,
-  tokenId?: BigNumberish,
+  tokenId: BigNumberish,
 ) {
   const nftCollection = useNFTCollection(contractAddress);
   return useMutation(
     async ({ to, toStranger }: { to: string; toStranger?: true }) => {
       invariant(nftCollection, "nftCollection is required");
-      invariant(tokenId, "tokenId is required");
 
       if (toStranger) {
         const res = await fetch(

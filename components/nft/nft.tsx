@@ -5,21 +5,18 @@ import { useQuery } from "react-query";
 
 export interface NFTRendererProps extends BoxProps {
   contractAddress: string;
-  tokenId?: BigNumberish;
+  tokenId: BigNumberish;
 }
 
-export function useNFT(contractAddress: string, tokenId?: BigNumberish) {
+export function useNFT(contractAddress: string, tokenId: BigNumberish) {
   const nftCollection = useNFTCollection(contractAddress);
   return useQuery(
     ["nft-asset", contractAddress, tokenId],
     () => {
-      if (tokenId === undefined) {
-        return undefined;
-      }
       return nftCollection?.get(tokenId);
     },
     {
-      enabled: !!nftCollection && tokenId !== undefined,
+      enabled: !!nftCollection,
     },
   );
 }
