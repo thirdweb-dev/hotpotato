@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { ColorSchemeToggle } from "../shared/color-toggle";
 import { LinkButton } from "../shared/link-button";
-import { IoGameControllerOutline, IoLogoTwitter } from "react-icons/io5";
+import { IoLogoTwitter } from "react-icons/io5";
 import { ConnectWallet } from "../shared/connect-wallet-button";
 
 export const Header: React.FC = () => {
@@ -31,40 +31,17 @@ export const Header: React.FC = () => {
           </Heading>
         </Link>
 
-        <Flex gap={4} as="nav">
+        <Flex gap={2} as="nav">
           <LinkButton
             colorScheme="purple"
-            _hover={{ textDecor: "underline" }}
             href="https://twitter.com/@HotPotatoGG"
             variant="link"
             isExternal
+            noIcon
           >
             <IoLogoTwitter />
           </LinkButton>
           <ColorSchemeToggle />
-          <LinkButton
-            colorScheme="purple"
-            _hover={{ textDecor: "underline" }}
-            href="/farm"
-            variant="link"
-          >
-            Manifesto
-          </LinkButton>
-          <LinkButton
-            colorScheme="purple"
-            _hover={{ textDecor: "underline" }}
-            href="/faq"
-            variant="link"
-          >
-            F.A.Q
-          </LinkButton>
-          <LinkButton
-            href="/"
-            colorScheme="purple"
-            rightIcon={<IoGameControllerOutline />}
-          >
-            Play
-          </LinkButton>
           <ConnectWallet size="md" />
         </Flex>
       </Container>
