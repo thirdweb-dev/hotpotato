@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 
 export interface PlayerInfo {
-    address: string,
-    twitterHandle: string,
-    transferedAt: number,
-    timeSpent: number,
+  address: string;
+  twitterHandle: string;
+  transferedAt: number;
+  timeSpent: number;
 }
 
 type GamePlayers = Array<PlayerInfo>;
@@ -27,4 +27,3 @@ export function useGamePlayers() {
     },
   );
 }
-

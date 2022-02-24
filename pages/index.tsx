@@ -9,7 +9,6 @@ import {
   StatGroup,
   Skeleton,
   useBreakpointValue,
-  Text
 } from "@chakra-ui/react";
 import { NFTRenderer } from "../components/nft/nft";
 import { useGameState } from "../hooks/useGameState";

@@ -10,7 +10,7 @@ export const TableRow: React.FC<TableRowProps> = ({ info }) => {
     return null;
   }
 
-  let date = new Date(info.transferedAt);
+  const date = new Date(info.transferedAt);
 
   return (
     <Tr>
