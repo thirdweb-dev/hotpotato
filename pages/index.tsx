@@ -39,7 +39,10 @@ export default function Home() {
   return (
     <Container py={4} maxW="container.page">
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 8, md: 16 }}>
-        <NFTRenderer contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
+        <NFTRenderer
+          contractAddress={CONTRACT_ADDRESS}
+          tokenId={gameState.data?.current_round}
+        />
         <Flex direction="column" gap={8} justify="space-around" flexGrow={1}>
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
             {playerStateData.isOwner
@@ -55,7 +58,7 @@ export default function Home() {
           <ActionArea
             playerState={playerStateData}
             contractAddress={CONTRACT_ADDRESS}
-            tokenId={gameState.data.current_round}
+            tokenId={gameState.data?.current_round}
           />
 
           <StatGroup>
