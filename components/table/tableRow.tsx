@@ -20,7 +20,7 @@ function msToTime(duration) {
 
 // formatting for address (responsive)
 function truncateAddress(address) {
-  return `${address.slice(0, 6)}"..."${address.slice(-4)}`;
+  return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
 export const TableRow: React.FC<TableRowProps> = ({ info }) => {

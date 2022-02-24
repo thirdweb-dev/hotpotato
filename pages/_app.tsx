@@ -10,6 +10,7 @@ import Manifesto from "./manifesto";
 import Home from ".";
 import FAQ from "./faq";
 import { ConnectWallet } from "../components/shared/connect-wallet-button";
+import Log from "./log";
 
 const BASE_URL = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -54,6 +55,7 @@ function PotatoApp({ Component, pageProps }) {
           <Flex justify="space-around" flexDir="column" minH="100vh">
             <Header />
             <Home />
+            <Log />
             <Manifesto />
             <Footer />
             <NetworkSwitcher requiredChainId={ChainId.Polygon} />

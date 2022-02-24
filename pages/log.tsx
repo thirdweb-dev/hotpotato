@@ -14,7 +14,7 @@ import {
 import { TableRow } from "../components/table/tableRow";
 import { useGamePlayers } from "../hooks/usePlayers";
 
-export default function LOG() {
+export default function Log() {
   const player = useGamePlayers();
   const playerRows = player.data?.map((info) => {
     return <TableRow key={info.address} info={info}></TableRow>;
@@ -23,15 +23,14 @@ export default function LOG() {
   console.log(player.data);
 
   return (
-    <Box position="relative">
-      <Container py={4} maxW="container.page">
-        <SimpleGrid columns={1} alignItems="center" gap={{ base: 8, md: 16 }}>
-          <Flex gap={4} direction="column">
-            <Heading as="h2" size="xl" textAlign="center">
-              Potato Pass Log
-            </Heading>
-            <Table variant="simple" size="lg">
-              <TableCaption>Potato Pass Log</TableCaption>
+    <Container py={4} maxW="container.page">
+      <SimpleGrid columns={1} alignItems="center" gap={{ base: 8, md: 16 }}>
+        <Flex gap={4} direction="column">
+          <Heading as="h2" size="xl" textAlign={{ base: "left", md: "center" }}>
+            Potato Passes
+          </Heading>
+          <Box w="100%" overflow="auto">
+            <Table variant="simple" size="lg" maxWidth="100%">
               <Thead>
                 <Tr>
                   <Th>Twitter</Th>
@@ -43,9 +42,9 @@ export default function LOG() {
                 {playerRows}
               </Thead>
             </Table>
-          </Flex>
-        </SimpleGrid>
-      </Container>
-    </Box>
+          </Box>
+        </Flex>
+      </SimpleGrid>
+    </Container>
   );
 }
