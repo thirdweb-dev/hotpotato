@@ -31,40 +31,16 @@ export const Header: React.FC = () => {
           </Heading>
         </Link>
 
-        <Flex gap={4} as="nav">
+        <Flex gap={2} as="nav">
           <LinkButton
             colorScheme="purple"
             _hover={{ textDecor: "underline" }}
             href="https://twitter.com/@HotPotatoGG"
             variant="link"
-            isExternal
           >
             <IoLogoTwitter />
           </LinkButton>
           <ColorSchemeToggle />
-          <LinkButton
-            colorScheme="purple"
-            _hover={{ textDecor: "underline" }}
-            href="/farm"
-            variant="link"
-          >
-            Manifesto
-          </LinkButton>
-          <LinkButton
-            colorScheme="purple"
-            _hover={{ textDecor: "underline" }}
-            href="/faq"
-            variant="link"
-          >
-            F.A.Q
-          </LinkButton>
-          <LinkButton
-            href="/"
-            colorScheme="purple"
-            rightIcon={<IoGameControllerOutline />}
-          >
-            Play
-          </LinkButton>
           <ConnectWallet size="md" />
         </Flex>
       </Container>

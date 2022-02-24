@@ -37,7 +37,7 @@ export default function Home() {
   };
 
   return (
-    <Container py={4} maxW="container.page">
+    <Container py={12} maxW="container.page">
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 8, md: 16 }}>
         <NFTRenderer
           contractAddress={CONTRACT_ADDRESS}
