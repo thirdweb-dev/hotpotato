@@ -5,21 +5,20 @@ interface TableRowProps {
   info: PlayerInfo;
 }
 
-//formatting for time spent
+// formatting for time spent
 function msToTime(duration) {
-  const milliseconds = Math.floor((duration % 1000) / 100),
-    seconds = Math.floor((duration / 1000) % 60),
+  const seconds = Math.floor((duration / 1000) % 60),
     minutes = Math.floor((duration / (1000 * 60)) % 60),
     hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-  const hoursString = hours < 10 ? "0" + hours : hours;
-  const minutesString = minutes < 10 ? "0" + minutes : minutes;
-  const secondsString = seconds < 10 ? "0" + seconds : seconds;
+  const hoursString = hours < 10 ? `0${hours}` : hours;
+  const minutesString = minutes < 10 ? `0${minutes}` : minutes;
+  const secondsString = seconds < 10 ? `0${seconds}` : seconds;
 
   return hoursString + ":" + minutesString + ":" + secondsString;
 }
 
-//formatting for address (responsive)
+// formatting for address (responsive)
 function truncateAddress(address) {
   return address.slice(0, 6) + "..." + address.slice(-4);
 }
@@ -29,7 +28,7 @@ export const TableRow: React.FC<TableRowProps> = ({ info }) => {
     return null;
   }
 
-  //formatting for date
+  // formatting for date
   const date = new Date(info.transferedAt);
 
   return (
