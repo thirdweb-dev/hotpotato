@@ -13,7 +13,7 @@ export function useNFT(contractAddress: string, tokenId?: BigNumberish) {
   return useQuery(
     ["nft-asset", contractAddress, tokenId],
     () => {
-      if (!tokenId) {
+      if (tokenId === undefined) {
         return undefined;
       }
       return nftCollection?.get(tokenId);
