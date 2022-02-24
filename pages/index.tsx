@@ -17,8 +17,7 @@ import { ActionArea } from "../components/actions/action-area";
 import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 // import { useGamePlayers } from "../hooks/usePlayers";
 import { useWeb3 } from "../hooks/useWeb3";
-import { PlayerStateType, usePlayerState } from "../hooks/usePlayerState";
-import { useEffect, useState } from "react";
+import { usePlayerState } from "../hooks/usePlayerState";
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
 

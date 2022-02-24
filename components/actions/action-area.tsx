@@ -18,8 +18,6 @@ import { useForm } from "react-hook-form";
 import { isAddress } from "ethers/lib/utils";
 import { FiTwitter } from "react-icons/fi";
 import { LinkButton } from "../shared/link-button";
-import { useHasRegistered } from "../../hooks/useHasRegistered";
-import { useHasPlayed } from "../../hooks/useHasPlayed";
 import { PlayerStateType } from "../../hooks/usePlayerState";
 
 interface ActionAreaProps {
