@@ -15,7 +15,7 @@ export function usePlayerState(address?: string) {
       if (!address) {
         return false;
       }
-      console.log("Fetching player state for", address);
+
       const res = await fetch(
         `https://nftlabs-hotpotatoserver.zeet-nftlabs.zeet.app/playerstate?address=${address}`,
       );
