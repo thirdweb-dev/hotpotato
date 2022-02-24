@@ -1,5 +1,6 @@
 import {
   Button,
+  Center,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -37,7 +38,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
   playerState,
 }) => {
   const [fetchingStranger, setFetchingStranger] = useState(false);
-  const [transferAddress, setTransferAddress] = useState("");
+  const [isRandom, setIsRandom] = useState(false);
   const stranger = async () => {
     setFetchingStranger(true);
     const res = await fetch(
@@ -49,8 +50,25 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
   };
 
   const sendToStranger = async () => {
+    setIsRandom(true);
     const strangerAddress = await stranger();
-    setTransferAddress(strangerAddress);
+    mutation.mutate(strangerAddress, {
+      onSuccess: () => {
+        toast({
+          title: "Potato heating up! 🔥",
+          description: "Potato got passed, heat level increased.",
+          status: "success",
+        });
+      },
+      onError: (err) => {
+        console.error("failed to transfer", err);
+        toast({
+          title: "Potato dropped 🥶",
+          description: "Something went wrong, you could try again!",
+          status: "error",
+        });
+      },
+    });
   };
   const { address } = useWeb3();
   const asset = useNFT(contractAddress, tokenId);
@@ -88,7 +106,8 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     return (
       <Flex
         as="form"
-        onSubmit={handleSubmit((d) =>
+        onSubmit={handleSubmit((d) => {
+          setIsRandom(false);
           mutation.mutate(d.to, {
             onSuccess: () => {
               toast({
@@ -105,8 +124,8 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
                 status: "error",
               });
             },
-          }),
-        )}
+          });
+        })}
         direction="column"
         gap={4}
       >
@@ -116,14 +135,13 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
             <Input
               isDisabled={mutation.isLoading}
               size="lg"
-              value={transferAddress}
               variant="filled"
               {...register("to", {
                 validate: (d) => isAddress(d) || "Not a valid address.",
               })}
             />
             <Button
-              isLoading={mutation.isLoading}
+              isLoading={mutation.isLoading && !isRandom}
               loadingText="transferring..."
               type="submit"
               size="lg"
@@ -131,21 +149,22 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
             >
               Transfer
             </Button>
-            <Button
-              isLoading={fetchingStranger}
-              loadingText="fetching..."
-              type="button"
-              size="lg"
-              variant="outline"
-              onClick={sendToStranger}
-            >
-              Random
-            </Button>
           </Flex>
           <FormErrorMessage>
             {getFieldState("to", formState).error?.message}
           </FormErrorMessage>
         </FormControl>
+        <Center>OR</Center>
+        <Button
+          isLoading={fetchingStranger || (mutation.isLoading && isRandom)}
+          loadingText="transferring..."
+          type="button"
+          size="lg"
+          variant="outline"
+          onClick={sendToStranger}
+        >
+          Pass it to a stranger
+        </Button>
       </Flex>
     );
   }
