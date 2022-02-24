@@ -37,13 +37,14 @@ export default function LOG() {
             <Heading as="h2" size="xl" textAlign='center'>
               Potato Pass Log
             </Heading>
-            <Table variant="simple">
+            <Table variant="simple" size="lg">
               <TableCaption>Potato Pass Log</TableCaption>
               <Thead>
                 <Tr>
                   <Th>Twitter</Th>
                   <Th>Address</Th>
-                  <Th>Transferred On</Th>
+                  <Th>Transfer Date</Th>
+                  <Th>Transfer Time</Th>
                   <Th>Time Held</Th>
                 </Tr>
                 {playerRows}
