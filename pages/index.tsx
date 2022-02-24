@@ -14,7 +14,7 @@ import { NFTRenderer } from "../components/nft/nft";
 import { useGameState } from "../hooks/useGameState";
 import Countdown from "react-countdown";
 import { ActionArea } from "../components/actions/action-area";
-import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
+import { CONTRACT_ADDRESS } from "../constants/game-config";
 // import { useGamePlayers } from "../hooks/usePlayers";
 import { useWeb3 } from "../hooks/useWeb3";
 import { usePlayerState } from "../hooks/usePlayerState";
@@ -23,7 +23,6 @@ const ROUND_TIME = 1000 * 60 * 60 * 24;
 
 export default function Home() {
   const gameState = useGameState();
-
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { address } = useWeb3();
   const playerState = usePlayerState(address);

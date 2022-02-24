@@ -6,7 +6,7 @@ interface TableRowProps {
 }
 
 // formatting for time spent
-function msToTime(duration) {
+function msToTime(duration: number) {
   const seconds = Math.floor((duration / 1000) % 60),
     minutes = Math.floor((duration / (1000 * 60)) % 60),
     hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
@@ -19,7 +19,7 @@ function msToTime(duration) {
 }
 
 // formatting for address (responsive)
-function truncateAddress(address) {
+function truncateAddress(address: string) {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 

@@ -8,11 +8,10 @@ import {
   Thead,
   Tr,
   Th,
-  TableCaption,
+  useBreakpointValue,
 } from "@chakra-ui/react";
-
-import { TableRow } from "../components/table/tableRow";
-import { useGamePlayers } from "../hooks/usePlayers";
+import { useGamePlayers } from "../../hooks/usePlayers";
+import { TableRow } from "../table/tableRow";
 
 export default function Log() {
   const player = useGamePlayers();
@@ -20,7 +19,7 @@ export default function Log() {
     return <TableRow key={info.address} info={info}></TableRow>;
   });
 
-  console.log(player.data);
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
     <Container py={4} maxW="container.page">
@@ -30,7 +29,11 @@ export default function Log() {
             Potato Passes
           </Heading>
           <Box w="100%" overflow="auto">
-            <Table variant="simple" size="lg" maxWidth="100%">
+            <Table
+              variant="simple"
+              size={isMobile ? "md" : "lg"}
+              maxWidth="100%"
+            >
               <Thead>
                 <Tr>
                   <Th>Twitter</Th>

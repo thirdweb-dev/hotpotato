@@ -80,7 +80,7 @@ export const Providers: React.FC<ProviderProps> = ({ children, chainId }) => {
           readonlySettings: chainId
             ? {
                 chainId,
-                rpcUrl: alchemyUrlMap[chainId],
+                rpcUrl: alchemyUrlMap[chainId as keyof typeof alchemyUrlMap],
               }
             : undefined,
         }}
