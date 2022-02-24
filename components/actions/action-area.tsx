@@ -1,5 +1,6 @@
 import {
   Button,
+  Center,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -19,6 +20,7 @@ import { isAddress } from "ethers/lib/utils";
 import { FiTwitter } from "react-icons/fi";
 import { LinkButton } from "../shared/link-button";
 import { PlayerStateType } from "../../hooks/usePlayerState";
+import { useState } from "react";
 
 interface ActionAreaProps {
   contractAddress: string;
@@ -35,6 +37,39 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
   tokenId,
   playerState,
 }) => {
+  const [fetchingStranger, setFetchingStranger] = useState(false);
+  const [isRandom, setIsRandom] = useState(false);
+  const stranger = async () => {
+    setFetchingStranger(true);
+    const res = await fetch(
+      "https://nftlabs-hotpotatoserver.zeet-nftlabs.zeet.app/randomwallet",
+    );
+    const json = await res.json();
+    setFetchingStranger(false);
+    return json.address;
+  };
+
+  const sendToStranger = async () => {
+    setIsRandom(true);
+    const strangerAddress = await stranger();
+    mutation.mutate(strangerAddress, {
+      onSuccess: () => {
+        toast({
+          title: "Potato heating up! 🔥",
+          description: "Potato got passed, heat level increased.",
+          status: "success",
+        });
+      },
+      onError: (err) => {
+        console.error("failed to transfer", err);
+        toast({
+          title: "Potato dropped 🥶",
+          description: "Something went wrong, you could try again!",
+          status: "error",
+        });
+      },
+    });
+  };
   const { address } = useWeb3();
   const asset = useNFT(contractAddress, tokenId);
   const { handleSubmit, register, formState, getFieldState } =
@@ -71,7 +106,8 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     return (
       <Flex
         as="form"
-        onSubmit={handleSubmit((d) =>
+        onSubmit={handleSubmit((d) => {
+          setIsRandom(false);
           mutation.mutate(d.to, {
             onSuccess: () => {
               toast({
@@ -88,12 +124,12 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
                 status: "error",
               });
             },
-          }),
-        )}
+          });
+        })}
         direction="column"
         gap={4}
       >
-        <Text fontWeight="500">Transfer hot potato</Text>
+        <Text fontWeight="500">Pass the potato to a friend</Text>
         <FormControl isInvalid={getFieldState("to", formState).invalid}>
           <Flex gap={2}>
             <Input
@@ -105,7 +141,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
               })}
             />
             <Button
-              isLoading={mutation.isLoading}
+              isLoading={mutation.isLoading && !isRandom}
               loadingText="transferring..."
               type="submit"
               size="lg"
@@ -118,6 +154,17 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
             {getFieldState("to", formState).error?.message}
           </FormErrorMessage>
         </FormControl>
+        <Center>OR</Center>
+        <Button
+          isLoading={fetchingStranger || (mutation.isLoading && isRandom)}
+          loadingText="transferring..."
+          type="button"
+          size="lg"
+          variant="outline"
+          onClick={sendToStranger}
+        >
+          Pass it to a stranger
+        </Button>
       </Flex>
     );
   }

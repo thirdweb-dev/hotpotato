@@ -13,7 +13,7 @@ export function useTransferMutation(
     (to: string) => {
       invariant(nftCollection, "nftCollection is required");
       invariant(tokenId, "tokenId is required");
-      console.log("transfer", to);
+
       return nftCollection.transfer(to, tokenId);
     },
     {
