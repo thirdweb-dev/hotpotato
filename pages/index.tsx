@@ -28,6 +28,13 @@ export default function Home() {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { address } = useWeb3();
   const playerState = usePlayerState(address);
+  const playerStateData = playerState.data || {
+    hasPlayed: false,
+    isEligible: false,
+    username: "",
+    isRegistered: false,
+    isOwner: false,
+  };
 
   return (
     <Container py={4} maxW="container.page">
@@ -35,18 +42,18 @@ export default function Home() {
         <NFTRenderer contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
         <Flex direction="column" gap={8} justify="space-around" flexGrow={1}>
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
-            {playerState.data?.isOwner
+            {playerStateData.isOwner
               ? "You are Holding the Potato!"
-              : playerState.data?.hasPlayed
+              : playerStateData.hasPlayed
               ? "You Already Passed the Potato!"
-              : playerState.data?.isRegistered
+              : playerStateData.isRegistered
               ? "You're registered!"
-              : playerState.data?.isRegistered === false
+              : playerStateData.isRegistered === false
               ? "Join the Hot Potato NFT game!"
               : "Connect your wallet"}
           </Heading>
           <ActionArea
-            playerState={playerState.data}
+            playerState={playerStateData}
             contractAddress={CONTRACT_ADDRESS}
             tokenId={TOKEN_ID}
           />
