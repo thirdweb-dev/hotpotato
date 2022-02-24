@@ -1,4 +1,4 @@
-import { Flex, Center, Container } from "@chakra-ui/react";
+import { Container, Flex, SimpleGrid } from "@chakra-ui/react";
 import { ChakraManager } from "../components/chakra/manager";
 import { Footer } from "../components/footer/footer";
 import { Header } from "../components/header/header";
@@ -6,10 +6,8 @@ import { Providers } from "../components/provider/provider";
 import { ChainId } from "../utils/network";
 import { DefaultSeo } from "next-seo";
 import { NetworkSwitcher } from "../components/network-switcher/network-switcher";
-import Manifesto from "./manifesto";
-import Home from ".";
-import FAQ from "./faq";
-import { ConnectWallet } from "../components/shared/connect-wallet-button";
+import Manifesto from "../components/pages/manifesto";
+import FAQ from "../components/pages/faq";
 
 const BASE_URL = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -53,8 +51,16 @@ function PotatoApp({ Component, pageProps }) {
         <ChakraManager cookies={pageProps.cookies}>
           <Flex justify="space-around" flexDir="column" minH="100vh">
             <Header />
-            <Home />
-            <Manifesto />
+            <Component />
+            <Container py={16} maxW="container.page">
+              <SimpleGrid
+                columns={{ base: 1, md: 2 }}
+                gap={{ base: 16, md: 24 }}
+              >
+                <Manifesto />
+                <FAQ />
+              </SimpleGrid>
+            </Container>
             <Footer />
             <NetworkSwitcher requiredChainId={ChainId.Polygon} />
           </Flex>
