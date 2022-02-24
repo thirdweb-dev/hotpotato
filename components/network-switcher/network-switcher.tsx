@@ -26,7 +26,7 @@ export const NetworkSwitcher: React.FC<NetworkSwitcherProps> = ({
   const [timedOut, setTimedOut] = useState(false);
   const [, switchNetwork] = useNetwork();
   const disconnect = useDisconnect();
-  const initialRef = useRef();
+  const initialRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -74,7 +74,9 @@ export const NetworkSwitcher: React.FC<NetworkSwitcherProps> = ({
                 colorScheme="purple"
                 isDisabled={!switchNetwork}
                 leftIcon={<HiOutlineSwitchHorizontal />}
-                onClick={() => switchNetwork(ChainId.Polygon)}
+                onClick={() =>
+                  switchNetwork ? switchNetwork(ChainId.Polygon) : null
+                }
               >
                 Switch Network
               </Button>

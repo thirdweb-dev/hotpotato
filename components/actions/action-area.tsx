@@ -24,7 +24,7 @@ import { useState } from "react";
 
 interface ActionAreaProps {
   contractAddress: string;
-  tokenId: BigNumberish;
+  tokenId?: BigNumberish;
   playerState: PlayerStateType;
 }
 

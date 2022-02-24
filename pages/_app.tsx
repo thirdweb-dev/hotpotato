@@ -8,12 +8,14 @@ import { DefaultSeo } from "next-seo";
 import { NetworkSwitcher } from "../components/network-switcher/network-switcher";
 import Manifesto from "../components/pages/manifesto";
 import FAQ from "../components/pages/faq";
+import Log from "../components/pages/log";
+import { AppProps } from "next/app";
 
 const BASE_URL = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-function PotatoApp({ Component, pageProps }) {
+function PotatoApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo
@@ -52,14 +54,17 @@ function PotatoApp({ Component, pageProps }) {
           <Flex justify="space-around" flexDir="column" minH="100vh">
             <Header />
             <Component />
-            <Container py={16} maxW="container.page">
-              <SimpleGrid
-                columns={{ base: 1, md: 2 }}
-                gap={{ base: 16, md: 24 }}
-              >
-                <Manifesto />
-                <FAQ />
-              </SimpleGrid>
+            <Container maxW="container.page" pb={16}>
+              <Flex direction="column" gap={{ base: 16, md: 24 }}>
+                <Log />
+                <SimpleGrid
+                  columns={{ base: 1, md: 2 }}
+                  gap={{ base: 16, md: 24 }}
+                >
+                  <Manifesto />
+                  <FAQ />
+                </SimpleGrid>
+              </Flex>
             </Container>
             <Footer />
             <NetworkSwitcher requiredChainId={ChainId.Polygon} />

@@ -1,14 +1,13 @@
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { IpfsStorage } from "@thirdweb-dev/sdk";
-import { BigNumber } from "ethers";
-import React, { useEffect } from "react";
+import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { createWebStoragePersistor } from "react-query/createWebStoragePersistor-experimental";
-import { persistQueryClient } from "react-query/persistQueryClient-experimental";
+// import { createWebStoragePersistor } from "react-query/createWebStoragePersistor-experimental";
+// import { persistQueryClient } from "react-query/persistQueryClient-experimental";
 import { ChainId, SUPPORTED_CHAIN_ID } from "../../utils/network";
 
-const __CACHE_BUSTER = "tw_v2.0.0-nightly.2";
-
+// const __CACHE_BUSTER = "tw_v2.0.0-nightly.2";
+//
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -20,19 +19,19 @@ export const queryClient = new QueryClient({
   },
 });
 
-function replacer(_key: string, value: any) {
-  // if we find a BigNumber then make it into a string (since that is safe)
-  if (
-    BigNumber.isBigNumber(value) ||
-    (typeof value === "object" &&
-      value !== null &&
-      value.type === "BigNumber" &&
-      "hex" in value)
-  ) {
-    return BigNumber.from(value).toString();
-  }
-  return value;
-}
+// function replacer(_key: string, value: any) {
+//   // if we find a BigNumber then make it into a string (since that is safe)
+//   if (
+//     BigNumber.isBigNumber(value) ||
+//     (typeof value === "object" &&
+//       value !== null &&
+//       value.type === "BigNumber" &&
+//       "hex" in value)
+//   ) {
+//     return BigNumber.from(value).toString();
+//   }
+//   return value;
+// }
 
 export const StorageSingleton = new IpfsStorage(
   process.env.NEXT_PUBLIC_IPFS_GATEWAY_URL,
@@ -53,16 +52,16 @@ export interface ProviderProps {
 }
 
 export const Providers: React.FC<ProviderProps> = ({ children, chainId }) => {
-  useEffect(() => {
-    persistQueryClient({
-      queryClient,
-      buster: __CACHE_BUSTER,
-      persistor: createWebStoragePersistor({
-        storage: window.localStorage,
-        serialize: (data) => JSON.stringify(data, replacer),
-      }),
-    });
-  }, []);
+  // useEffect(() => {
+  //   persistQueryClient({
+  //     queryClient,
+  //     buster: __CACHE_BUSTER,
+  //     persistor: createWebStoragePersistor({
+  //       storage: window.localStorage,
+  //       serialize: (data) => JSON.stringify(data, replacer),
+  //     }),
+  //   });
+  // }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -80,7 +79,7 @@ export const Providers: React.FC<ProviderProps> = ({ children, chainId }) => {
           readonlySettings: chainId
             ? {
                 chainId,
-                rpcUrl: alchemyUrlMap[chainId],
+                rpcUrl: alchemyUrlMap[chainId as keyof typeof alchemyUrlMap],
               }
             : undefined,
         }}

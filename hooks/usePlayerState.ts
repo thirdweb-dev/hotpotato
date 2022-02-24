@@ -8,7 +8,7 @@ export interface PlayerStateType {
   isOwner: boolean;
 }
 
-export function usePlayerState(address: string) {
+export function usePlayerState(address?: string) {
   return useQuery<PlayerStateType>(
     [`player-state`, address],
     async () => {
@@ -23,10 +23,11 @@ export function usePlayerState(address: string) {
         throw new Error("request failed");
       }
       const json = await res.json();
-      console.log(json);
+
       return json;
     },
     {
+      enabled: !!address,
       refetchIntervalInBackground: false,
       refetchInterval: 1000 * 10,
     },
