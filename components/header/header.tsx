@@ -37,6 +37,7 @@ export const Header: React.FC = () => {
             _hover={{ textDecor: "underline" }}
             href="https://twitter.com/@HotPotatoGG"
             variant="link"
+            isExternal
           >
             <IoLogoTwitter />
           </LinkButton>
