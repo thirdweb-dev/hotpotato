@@ -29,37 +29,29 @@ export default function Home() {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { address } = useWeb3();
   const playerState = usePlayerState(address);
-  const [heading, setHeading] = useState("");
-  const [action, setAction] = useState(<></>);
-  useEffect(() => {
-    setHeading(
-      playerState.data?.isOwner
-        ? "You are Holding the Potato!"
-        : playerState.data?.hasPlayed
-        ? "You Already Passed the Potato!"
-        : playerState.data?.isRegistered
-        ? "You're registered!"
-        : playerState.data?.isRegistered === false
-        ? "Join the Hot Potato NFT game!"
-        : "Connect your wallet",
-    );
-    setAction(
-      <ActionArea
-        playerState={playerState.data}
-        contractAddress={CONTRACT_ADDRESS}
-        tokenId={TOKEN_ID}
-      />,
-    );
-  }, [playerState]);
+
   return (
     <Container py={4} maxW="container.page">
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 8, md: 16 }}>
         <NFTRenderer contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
         <Flex direction="column" gap={8} justify="space-around" flexGrow={1}>
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
-            {heading}
+            {playerState.data?.isOwner
+              ? "You are Holding the Potato!"
+              : playerState.data?.hasPlayed
+              ? "You Already Passed the Potato!"
+              : playerState.data?.isRegistered
+              ? "You're registered!"
+              : playerState.data?.isRegistered === false
+              ? "Join the Hot Potato NFT game!"
+              : "Connect your wallet"}
           </Heading>
-          {action}
+          <ActionArea
+            playerState={playerState.data}
+            contractAddress={CONTRACT_ADDRESS}
+            tokenId={TOKEN_ID}
+          />
+
           <StatGroup>
             <Stat>
               <StatLabel>Round</StatLabel>
