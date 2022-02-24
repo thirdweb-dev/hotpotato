@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-interface PlayerState {
+export interface PlayerStateType {
   hasPlayed: boolean;
   isEligible: boolean;
   username: string;
@@ -9,7 +9,7 @@ interface PlayerState {
 }
 
 export function usePlayerState(address: string) {
-  return useQuery<PlayerState>(
+  return useQuery<PlayerStateType>(
     [`player-state`, address],
     async () => {
       if (!address) {
@@ -24,7 +24,7 @@ export function usePlayerState(address: string) {
       }
       const json = await res.json();
       console.log(json);
-      return json.exists;
+      return json;
     },
     {
       refetchIntervalInBackground: false,

@@ -17,7 +17,8 @@ import { ActionArea } from "../components/actions/action-area";
 import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 // import { useGamePlayers } from "../hooks/usePlayers";
 import { useWeb3 } from "../hooks/useWeb3";
-import { usePlayerState } from "../hooks/usePlayerState";
+import { PlayerStateType, usePlayerState } from "../hooks/usePlayerState";
+import { useEffect, useState } from "react";
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
 
@@ -28,19 +29,27 @@ export default function Home() {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { address } = useWeb3();
   const playerState = usePlayerState(address);
+  const [heading, setHeading] = useState("");
+  useEffect(() => {
+    setHeading(
+      playerState.data?.isOwner
+        ? "You are Holding the Potato!"
+        : playerState.data?.hasPlayed
+        ? "You Already Passed the Potato!"
+        : playerState.data?.isRegistered
+        ? "You're registered!"
+        : playerState.data?.isRegistered === false
+        ? "Join the Hot Potato NFT game!"
+        : "Connect your wallet",
+    );
+  }, [playerState]);
   return (
     <Container py={4} maxW="container.page">
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 8, md: 16 }}>
         <NFTRenderer contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
         <Flex direction="column" gap={8} justify="space-around" flexGrow={1}>
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
-            {playerState.data?.isOwner
-              ? "You are Holding the Potato!"
-              : playerState.data?.hasPlayed
-              ? "You Already Passed the Potato!"
-              : playerState.data?.isRegistered
-              ? "You're registered!"
-              : "Join the Hot Potato NFT game!"}
+            {heading}
           </Heading>
 
           <ActionArea contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
