@@ -1,6 +1,13 @@
 import { useQuery } from "react-query";
 
-type GamePlayers = Array<string>;
+export interface PlayerInfo {
+    address: string,
+    twitterHandle: string,
+    transferedAt: number,
+    timeSpent: number,
+}
+
+type GamePlayers = Array<PlayerInfo>;
 
 export function useGamePlayers() {
   return useQuery<GamePlayers>(
@@ -20,3 +27,4 @@ export function useGamePlayers() {
     },
   );
 }
+

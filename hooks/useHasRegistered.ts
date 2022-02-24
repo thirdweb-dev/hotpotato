@@ -14,7 +14,6 @@ export function useHasRegistered(address: string) {
         throw new Error("request failed");
       }
       const json = await res.json();
-      console.log(json);
       return json.exists;
     },
     {

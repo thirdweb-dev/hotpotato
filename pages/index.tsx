@@ -9,6 +9,7 @@ import {
   StatGroup,
   Skeleton,
   useBreakpointValue,
+  Text
 } from "@chakra-ui/react";
 import { NFTRenderer } from "../components/nft/nft";
 import { useGameState } from "../hooks/useGameState";
@@ -19,12 +20,14 @@ import { CONTRACT_ADDRESS, TOKEN_ID } from "../constants/game-config";
 import { useWeb3 } from "../hooks/useWeb3";
 import { useHasPlayed } from "../hooks/useHasPlayed";
 import { useHasRegistered } from "../hooks/useHasRegistered";
+import { useGamePlayers } from "../hooks/usePlayers";
 // 24h round time
 const ROUND_TIME = 1000 * 60 * 60 * 24;
 
 export default function Home() {
   const gameState = useGameState();
-  // const players = useGamePlayers();
+  const players = useGamePlayers();
+  console.log(players);
   // console.log("*** players", players.data);
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { address } = useWeb3();
