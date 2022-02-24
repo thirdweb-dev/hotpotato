@@ -46,7 +46,12 @@ export const ConnectWallet: React.FC<ButtonProps> = (buttonProps) => {
         >
           <Flex direction="row" gap={3} align="center">
             <Icon boxSize={6} as={SVG} />
-            <Flex gap={0.5} direction="column" textAlign="left">
+            <Flex
+              display={{ base: "none", md: "flex" }}
+              gap={0.5}
+              direction="column"
+              textAlign="left"
+            >
               <Text fontSize="sm">
                 <Skeleton as="span" isLoaded={!balance.isLoading}>
                   {balance.data?.formatted || "0.000"}
@@ -91,7 +96,10 @@ export const ConnectWallet: React.FC<ButtonProps> = (buttonProps) => {
         rightIcon={<FiChevronDown />}
         {...buttonProps}
       >
-        Connect Wallet
+        Connect{" "}
+        <Text as="span" display={{ base: "none", md: "inline" }}>
+          Wallet
+        </Text>
       </MenuButton>
 
       <MenuList>

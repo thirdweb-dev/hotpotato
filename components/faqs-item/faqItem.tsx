@@ -1,6 +1,11 @@
 import { Text, Box } from "@chakra-ui/react";
 
-export default function faqItem(props) {
+interface FaqItemProps {
+  question: string;
+  answer: JSX.Element | string;
+}
+
+export const FaqItem: React.FC<FaqItemProps> = (props) => {
   return (
     <Box>
       <Text fontSize="2xl" fontWeight="bold">
@@ -9,4 +14,4 @@ export default function faqItem(props) {
       <Text fontSize="md">{props.answer}</Text>
     </Box>
   );
-}
+};
