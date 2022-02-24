@@ -14,7 +14,7 @@ export function useHasPlayed(address: string) {
         throw new Error("request failed");
       }
       const json = await res.json();
-      console.log(json);
+
       return json.played;
     },
     {

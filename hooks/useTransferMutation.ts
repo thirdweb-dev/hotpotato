@@ -10,11 +10,22 @@ export function useTransferMutation(
 ) {
   const nftCollection = useNFTCollection(contractAddress);
   return useMutation(
-    (to: string) => {
+    async ({ to, toStranger }: { to: string; toStranger?: true }) => {
       invariant(nftCollection, "nftCollection is required");
       invariant(tokenId, "tokenId is required");
 
-      return nftCollection.transfer(to, tokenId);
+      if (toStranger) {
+        const res = await fetch(
+          "https://nftlabs-hotpotatoserver.zeet-nftlabs.zeet.app/randomwallet",
+        );
+        if (res.status !== 200) {
+          throw new Error("request failed");
+        }
+        const json: { address: string } = await res.json();
+        to = json.address;
+      }
+
+      return await nftCollection.transfer(to, tokenId);
     },
     {
       onSuccess: () => {

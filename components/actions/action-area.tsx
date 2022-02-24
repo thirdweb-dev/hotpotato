@@ -20,7 +20,6 @@ import { isAddress } from "ethers/lib/utils";
 import { FiTwitter } from "react-icons/fi";
 import { LinkButton } from "../shared/link-button";
 import { PlayerStateType } from "../../hooks/usePlayerState";
-import { useState } from "react";
 
 interface ActionAreaProps {
   contractAddress: string;
@@ -37,22 +36,19 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
   tokenId,
   playerState,
 }) => {
-  const [fetchingStranger, setFetchingStranger] = useState(false);
-  const [isRandom, setIsRandom] = useState(false);
-  const stranger = async () => {
-    setFetchingStranger(true);
-    const res = await fetch(
-      "https://nftlabs-hotpotatoserver.zeet-nftlabs.zeet.app/randomwallet",
-    );
-    const json = await res.json();
-    setFetchingStranger(false);
-    return json.address;
-  };
+  const { address } = useWeb3();
+  const asset = useNFT(contractAddress, tokenId);
+  const { handleSubmit, register, formState, getFieldState } =
+    useForm<TransferForm>({
+      defaultValues: { to: "" },
+    });
+  const mutation = useTransferMutation(contractAddress, tokenId);
 
-  const sendToStranger = async () => {
-    setIsRandom(true);
-    const strangerAddress = await stranger();
-    mutation.mutate(strangerAddress, {
+  const toast = useToast();
+
+  const doMutation = async (values: TransferForm, toStranger?: true) => {
+    const d = { ...values, toStranger };
+    mutation.mutate(d, {
       onSuccess: () => {
         toast({
           title: "Potato heating up! 🔥",
@@ -70,15 +66,6 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
       },
     });
   };
-  const { address } = useWeb3();
-  const asset = useNFT(contractAddress, tokenId);
-  const { handleSubmit, register, formState, getFieldState } =
-    useForm<TransferForm>({
-      defaultValues: { to: "" },
-    });
-  const mutation = useTransferMutation(contractAddress, tokenId);
-
-  const toast = useToast();
 
   if (asset.isLoading) {
     return (
@@ -106,26 +93,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     return (
       <Flex
         as="form"
-        onSubmit={handleSubmit((d) => {
-          setIsRandom(false);
-          mutation.mutate(d.to, {
-            onSuccess: () => {
-              toast({
-                title: "Potato heating up! 🔥",
-                description: "Potato got passed, heat level increased.",
-                status: "success",
-              });
-            },
-            onError: (err) => {
-              console.error("failed to transfer", err);
-              toast({
-                title: "Potato dropped 🥶",
-                description: "Something went wrong, you could try again!",
-                status: "error",
-              });
-            },
-          });
-        })}
+        onSubmit={handleSubmit((d) => doMutation(d))}
         direction="column"
         gap={4}
       >
@@ -141,7 +109,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
               })}
             />
             <Button
-              isLoading={mutation.isLoading && !isRandom}
+              isLoading={mutation.isLoading}
               loadingText="transferring..."
               type="submit"
               size="lg"
@@ -156,19 +124,18 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
         </FormControl>
         <Center>OR</Center>
         <Button
-          isLoading={fetchingStranger || (mutation.isLoading && isRandom)}
+          isLoading={mutation.isLoading}
           loadingText="transferring..."
           type="button"
           size="lg"
           variant="outline"
-          onClick={sendToStranger}
+          onClick={() => doMutation({ to: "" }, true)}
         >
           Pass it to a stranger
         </Button>
       </Flex>
     );
   }
-
   if (playerState.hasPlayed) {
     return (
       <Flex direction="column" gap={4}>
