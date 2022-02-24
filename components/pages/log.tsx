@@ -15,9 +15,12 @@ import { TableRow } from "../table/tableRow";
 
 export default function Log() {
   const player = useGamePlayers();
-  const playerRows = player.data?.map((info) => {
-    return <TableRow key={info.address} info={info}></TableRow>;
-  });
+  const playerRows = player.data
+    ?.slice(0)
+    .reverse()
+    .map((info) => {
+      return <TableRow key={info.address} info={info}></TableRow>;
+    });
 
   const isMobile = useBreakpointValue({ base: true, md: false });
 
