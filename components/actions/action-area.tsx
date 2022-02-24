@@ -20,10 +20,12 @@ import { FiTwitter } from "react-icons/fi";
 import { LinkButton } from "../shared/link-button";
 import { useHasRegistered } from "../../hooks/useHasRegistered";
 import { useHasPlayed } from "../../hooks/useHasPlayed";
+import { PlayerStateType } from "../../hooks/usePlayerState";
 
 interface ActionAreaProps {
   contractAddress: string;
   tokenId: BigNumberish;
+  playerState: PlayerStateType;
 }
 
 interface TransferForm {
@@ -33,11 +35,10 @@ interface TransferForm {
 export const ActionArea: React.FC<ActionAreaProps> = ({
   contractAddress,
   tokenId,
+  playerState,
 }) => {
   const { address } = useWeb3();
   const asset = useNFT(contractAddress, tokenId);
-  const hasRegistered = useHasRegistered(address);
-  const hasPlayed = useHasPlayed(address);
   const { handleSubmit, register, formState, getFieldState } =
     useForm<TransferForm>({
       defaultValues: { to: "" },
@@ -68,7 +69,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     );
   }
 
-  if (asset.data?.owner?.toLowerCase() === address?.toLowerCase()) {
+  if (playerState.isOwner) {
     return (
       <Flex
         as="form"
@@ -123,7 +124,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     );
   }
 
-  if (hasPlayed.data) {
+  if (playerState.hasPlayed) {
     return (
       <Flex direction="column" gap={4}>
         <Text fontWeight="500">
@@ -135,7 +136,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     );
   }
 
-  if (hasRegistered.data) {
+  if (playerState.isRegistered) {
     return (
       <Flex direction="column" gap={4}>
         <Text fontWeight="500">

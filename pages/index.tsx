@@ -30,6 +30,7 @@ export default function Home() {
   const { address } = useWeb3();
   const playerState = usePlayerState(address);
   const [heading, setHeading] = useState("");
+  const [action, setAction] = useState(<></>);
   useEffect(() => {
     setHeading(
       playerState.data?.isOwner
@@ -42,6 +43,13 @@ export default function Home() {
         ? "Join the Hot Potato NFT game!"
         : "Connect your wallet",
     );
+    setAction(
+      <ActionArea
+        playerState={playerState.data}
+        contractAddress={CONTRACT_ADDRESS}
+        tokenId={TOKEN_ID}
+      />,
+    );
   }, [playerState]);
   return (
     <Container py={4} maxW="container.page">
@@ -51,8 +59,7 @@ export default function Home() {
           <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
             {heading}
           </Heading>
-
-          <ActionArea contractAddress={CONTRACT_ADDRESS} tokenId={TOKEN_ID} />
+          {action}
           <StatGroup>
             <Stat>
               <StatLabel>Round</StatLabel>
