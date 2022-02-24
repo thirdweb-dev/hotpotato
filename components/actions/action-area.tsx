@@ -19,6 +19,7 @@ import { isAddress } from "ethers/lib/utils";
 import { FiTwitter } from "react-icons/fi";
 import { LinkButton } from "../shared/link-button";
 import { PlayerStateType } from "../../hooks/usePlayerState";
+import { useState } from "react";
 
 interface ActionAreaProps {
   contractAddress: string;
@@ -35,6 +36,22 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
   tokenId,
   playerState,
 }) => {
+  const [fetchingStranger, setFetchingStranger] = useState(false);
+  const [transferAddress, setTransferAddress] = useState("");
+  const stranger = async () => {
+    setFetchingStranger(true);
+    const res = await fetch(
+      "https://nftlabs-hotpotatoserver.zeet-nftlabs.zeet.app/randomwallet",
+    );
+    const json = await res.json();
+    setFetchingStranger(false);
+    return json.address;
+  };
+
+  const sendToStranger = async () => {
+    const strangerAddress = await stranger();
+    setTransferAddress(strangerAddress);
+  };
   const { address } = useWeb3();
   const asset = useNFT(contractAddress, tokenId);
   const { handleSubmit, register, formState, getFieldState } =
@@ -67,7 +84,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
     );
   }
 
-  if (playerState.isOwner) {
+  if (!playerState.isOwner) {
     return (
       <Flex
         as="form"
@@ -99,6 +116,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
             <Input
               isDisabled={mutation.isLoading}
               size="lg"
+              value={transferAddress}
               variant="filled"
               {...register("to", {
                 validate: (d) => isAddress(d) || "Not a valid address.",
@@ -112,6 +130,16 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
               variant="outline"
             >
               Transfer
+            </Button>
+            <Button
+              isLoading={fetchingStranger}
+              loadingText="fetching..."
+              type="button"
+              size="lg"
+              variant="outline"
+              onClick={sendToStranger}
+            >
+              Random
             </Button>
           </Flex>
           <FormErrorMessage>
