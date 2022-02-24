@@ -129,7 +129,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
         direction="column"
         gap={4}
       >
-        <Text fontWeight="500">Transfer hot potato</Text>
+        <Text fontWeight="500">Pass the potato to a friend</Text>
         <FormControl isInvalid={getFieldState("to", formState).invalid}>
           <Flex gap={2}>
             <Input
