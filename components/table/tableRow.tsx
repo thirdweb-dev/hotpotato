@@ -1,4 +1,4 @@
-import { Tr, Td } from "@chakra-ui/react";
+import { Tr, Td, Link } from "@chakra-ui/react";
 import { PlayerInfo } from "../../hooks/usePlayers";
 
 interface TableRowProps {
@@ -30,10 +30,19 @@ export const TableRow: React.FC<TableRowProps> = ({ info }) => {
 
   // formatting for date
   const date = new Date(info.transferedAt);
+  const twitter = info.twitterHandle;
 
   return (
     <Tr>
-      <Td>{info.twitterHandle ? `@${info.twitterHandle}` : " "}</Td>
+      <Td>
+        {twitter ? (
+          <Link href={`https://twitter.com/${twitter}`} isExternal>
+            @{twitter}
+          </Link>
+        ) : (
+          " "
+        )}
+      </Td>
       <Td>{truncateAddress(info.address)}</Td>
       <Td>{date.toLocaleDateString()}</Td>
       <Td>{date.toLocaleTimeString()}</Td>
