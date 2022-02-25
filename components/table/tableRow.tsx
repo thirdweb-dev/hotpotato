@@ -1,5 +1,4 @@
 import { Tr, Td, Link } from "@chakra-ui/react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { PlayerInfo } from "../../hooks/usePlayers";
 
 interface TableRowProps {
