@@ -6,8 +6,10 @@ import {
   FormErrorMessage,
   Heading,
   Input,
+  Link,
   Skeleton,
   Text,
+  useBreakpointValue,
   useToast,
 } from "@chakra-ui/react";
 import { BigNumberish } from "ethers";
@@ -36,6 +38,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
   tokenId,
   playerState,
 }) => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const { address } = useWeb3();
   const asset = useNFT(contractAddress, tokenId);
   const { handleSubmit, register, formState, getFieldState } =
@@ -60,7 +63,7 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
         console.error("failed to transfer", err);
         toast({
           title: "Potato dropped 🥶",
-          description: "Something went wrong, you could try again!",
+          description: "Something went wrong, please try again!",
           status: "error",
         });
       },
@@ -97,12 +100,15 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
         direction="column"
         gap={4}
       >
-        <Text fontWeight="500">Pass the potato to a friend</Text>
+        <Text fontSize="2xl" fontWeight="bold">
+          Pass the potato to a friend!
+        </Text>
         <FormControl isInvalid={getFieldState("to", formState).invalid}>
           <Flex gap={2}>
             <Input
               isDisabled={mutation.isLoading}
               size="lg"
+              placeholder="0x...."
               variant="filled"
               {...register("to", {
                 validate: (d) => isAddress(d) || "Not a valid address.",
@@ -115,14 +121,18 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
               size="lg"
               variant="outline"
             >
-              Transfer
+              Send
             </Button>
           </Flex>
           <FormErrorMessage>
             {getFieldState("to", formState).error?.message}
           </FormErrorMessage>
         </FormControl>
-        <Center>OR</Center>
+        <Center>
+          <Text fontSize="1xl" fontWeight="bold">
+            OR
+          </Text>
+        </Center>
         <Button
           isLoading={mutation.isLoading}
           loadingText="transferring..."
@@ -139,11 +149,19 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
   if (playerState.hasPlayed) {
     return (
       <Flex direction="column" gap={4}>
-        <Text fontWeight="500">
-          You helped what could potentially be the world record of the most
-          transferred NFT!
+        <Text fontSize={isMobile ? "xl" : "3xl"} fontWeight="bold">
+          You&apos;ve made history!
         </Text>
-        <Heading as="h5">You&apos;ve made history!</Heading>
+        <Text fontSize="md" fontWeight="bold">
+          Help break the world record of the most transferred NFT by tweeting
+          others to join too!
+        </Text>
+        <Link href="https://twitter.com/hotpotatogg">
+          <Text fontSize={isMobile ? "xl" : "2xl"} fontWeight="bold">
+            <FiTwitter style={{ display: "inline", paddingTop: 6 }} />
+            &nbsp;@HotPotatoGG
+          </Text>
+        </Link>
       </Flex>
     );
   }
@@ -151,21 +169,24 @@ export const ActionArea: React.FC<ActionAreaProps> = ({
   if (playerState.isRegistered) {
     return (
       <Flex direction="column" gap={4}>
-        <Text fontWeight="500">
-          You&apos;re registered to receive the Hot potato!
-        </Text>
         <Heading as="h5">
-          Keep an eye on your twitter feed for notifications!
+          Keep an eye on your twitter feed for potato notifications!
         </Heading>
+        <Link href="https://twitter.com/hotpotatogg">
+          <Text fontSize={isMobile ? "xl" : "2xl"} fontWeight="bold">
+            <FiTwitter style={{ display: "inline", paddingTop: 6 }} />
+            &nbsp;@HotPotatoGG
+          </Text>
+        </Link>
       </Flex>
     );
   }
 
   return (
     <Flex direction="column" gap={4}>
-      <Text fontWeight="500">
-        Hot potato is not in your wallet, tweet us to add your wallet to the
-        players list and get notified when you receive the Hot Potato!
+      <Heading as="h5">Wanna Join?</Heading>
+      <Text fontSize="lg" fontWeight="bold">
+        Tweet us your wallet address
       </Text>
       <LinkButton
         isExternal

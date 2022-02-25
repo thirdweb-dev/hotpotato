@@ -40,15 +40,15 @@ export default function Home() {
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 8, md: 16 }}>
         <NFTRenderer contractAddress={CONTRACT_ADDRESS} tokenId={tokenId} />
         <Flex direction="column" gap={8} justify="space-around" flexGrow={1}>
-          <Heading as="h2" size={isMobile ? "xl" : "4xl"}>
+          <Heading as="h2" size={isMobile ? "2xl" : "4xl"}>
             {playerStateData.isOwner
-              ? "You are Holding the Potato!"
+              ? "You are Holding the Potato! Your hands must be burning!"
               : playerStateData.hasPlayed
-              ? "You Already Passed the Potato!"
+              ? "You Passed the Potato like a rockstar!"
               : playerStateData.isRegistered
-              ? "You're registered!"
+              ? "Thanks for joining the spudfest!"
               : playerStateData.isRegistered === false
-              ? "Join the Hot Potato NFT game!"
+              ? "Welcome to the Hot Potato NFT game!"
               : "Connect your wallet"}
           </Heading>
           <ActionArea
