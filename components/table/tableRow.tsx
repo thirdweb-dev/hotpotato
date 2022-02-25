@@ -36,8 +36,8 @@ export const TableRow: React.FC<TableRowProps> = ({ info }) => {
     <Tr>
       <Td>
         {twitter ? (
-          <Link href={"https://twitter.com/" + twitter} isExternal>
-            @{info.twitterHandle}
+          <Link href={`https://twitter.com/${twitter}`} isExternal>
+            @{twitter}
           </Link>
         ) : (
           " "
